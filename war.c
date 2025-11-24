@@ -30,30 +30,34 @@ void criarTerritorio(Territorio *territorio, int tamanho){
         scanf("%d", &territorio[i].tropas);
     }
 }
+
+void mostrarTerritorios(Territorio *territorio, int tamanho){
+    //mostrar dados
+     printf("\n--- Dados dos Territorios ---\n");
+
+    //ler todos os dados de de cada posicao do vetor
+    for (int i = 0; i < tamanho; i++) {
+        printf("Territorio %d : -- nome %s -- cor  %s -- %d tropas --\n",
+            i + 1,
+            territorio[i].nome,
+            territorio[i].cor,
+            territorio[i].tropas
+        );
+     }
+}
+
 int main() {
 
     int tamanho;
 
     printf("Digite a quantidade de Territorios: ");
-    scanf("%d \n", &tamanho);
+    scanf("%d", &tamanho);
 
     Territorio *territorio = malloc(tamanho * sizeof(Territorio));
 
     criarTerritorio(territorio,tamanho);
+    mostrarTerritorios(territorio,tamanho);
 
-    //mostrar dados
-     printf("\n--- Dados dos Territorios ---\n");
-
-        //ler todos os dados de de cada posicao do vetor
-        for (int i = 0; i < tamanho; i++) {
-            printf("Territorio %d : -- nome %s -- cor  %s -- %d tropas --\n",
-                i + 1,
-                territorio[i].nome,
-                territorio[i].cor,
-                territorio[i].tropas
-    );
-}
-   
     free(territorio);
 
     return 0;

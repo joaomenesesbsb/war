@@ -86,11 +86,13 @@ int main() {
     printf("Digite a quantidade de Territorios: ");
     scanf("%d", &tamanho);
 
+    //Cria territorio em memoria
     Territorio *territorio = malloc(tamanho * sizeof(Territorio));
 
     criarTerritorio(territorio,tamanho);
     mostrarTerritorios(territorio,tamanho);
 
+    //Pede ao usuario quem deve atacar e quem vai ser atacaado
     int a, b;
     printf("\nEscolha o território que ATACA: ");
     scanf("%d", &a);
@@ -99,6 +101,9 @@ int main() {
     scanf("%d", &b);
     atacar(&territorio[a -1], &territorio[b - 1]);
 
+    mostrarTerritorios(territorio,tamanho);
+
+    //Limpa memoria
     free(territorio);
 
     return 0;

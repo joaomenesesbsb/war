@@ -57,19 +57,15 @@ void atacar(Territorio *territorio1, Territorio *territorio2){
 
     if(t1 > t2){
         printf("territorio %s VENCEU", territorio1->nome);
-        //vencedor ganha tropas
-        territorio1->tropas = territorio1->tropas + territorio2->tropas;
-        //territorio muda cor
-        strcpy(territorio2->cor, territorio1->cor);
+        //vencedor ganha metade das tropas
+        territorio1->tropas = territorio1->tropas + (territorio2->tropas/2);
         //territorio perde tropas
-        territorio2->tropas = 0;
+        territorio2->tropas = territorio2->tropas/2;
     }
     else  if(t1 < t2){
-        printf("territorio %s VENCEU", territorio2->nome);
-        //vencedor ganha tropas
-        territorio2->tropas = territorio1->tropas + territorio2->tropas;
-        //territorio muda cor
-        strcpy(territorio1->cor, territorio2->cor);
+        printf("territorio %s PERDEU", territorio1->nome);
+        //perdedor perde uma tropa
+        territorio1->tropas = territorio1->tropas - 1;
         //territorio perde tropas
         territorio1->tropas = 0;
     }
@@ -78,7 +74,12 @@ void atacar(Territorio *territorio1, Territorio *territorio2){
     }
 }
 
+void limparMemoria(Territorio *t){
+    free(&t);
+}
+
 int main() {
+    
     srand(time(NULL));
 
     int tamanho;
@@ -104,7 +105,7 @@ int main() {
     mostrarTerritorios(territorio,tamanho);
 
     //Limpa memoria
-    free(territorio);
+    limparMemoria(territorio);
 
     return 0;
 }

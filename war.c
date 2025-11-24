@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 // Definindo a estrutura territorio
 typedef struct {
@@ -8,14 +9,11 @@ typedef struct {
     int tropas;
 } Territorio;
 
+void criarTerritorio(Territorio *territorio, int tamanho){
 
-int main() {
-
-    // Criando struct territorio
-    Territorio territorio[5];
 
     //inserir os dados em cada posicao do vetor
-    for(int i = 0; i < 5 ; i++)
+    for(int i = 0; i < tamanho ; i++)
     {
         printf("\nTerritorio %d:\n", i + 1);
 
@@ -25,18 +23,29 @@ int main() {
 
         //leitor da cor
         printf("Cor: ");
-        scanf("%9s", &territorio[i].cor);
+        scanf("%9s", territorio[i].cor);
 
         //leitor de tropas
         printf("Tropas: ");
         scanf("%d", &territorio[i].tropas);
     }
+}
+int main() {
+
+    int tamanho;
+
+    printf("Digite a quantidade de Territorios: ");
+    scanf("%d \n", &tamanho);
+
+    Territorio *territorio = malloc(tamanho * sizeof(Territorio));
+
+    criarTerritorio(territorio,tamanho);
 
     //mostrar dados
      printf("\n--- Dados dos Territorios ---\n");
 
         //ler todos os dados de de cada posicao do vetor
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < tamanho; i++) {
             printf("Territorio %d : -- nome %s -- cor  %s -- %d tropas --\n",
                 i + 1,
                 territorio[i].nome,
@@ -45,4 +54,7 @@ int main() {
     );
 }
    
+    free(territorio);
+
+    return 0;
 }
